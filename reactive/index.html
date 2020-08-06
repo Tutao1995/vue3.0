@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="show-container"></p>
+    <button id="button-container">click me</button>
+  </body>
+  <script src="./main.js"></script>
+  <script>
+    const pDom = document.querySelector('#show-container')
+    const btnDom = document.querySelector('#button-container')
+    const o = {
+      name: 'tutao',
+      age: 1,
+    }
+    const obj = reactive(o)
+    const double = computed(() => obj.age * 2)
+    btnDom.addEventListener(
+      // 引起dom变化
+      'click',
+      function () {
+        obj.age += 1;
+      },
+      false
+    )
+    effect(() => {
+      //类似update 更新变化
+      pDom.innerHTML = `${obj.name}obj.age:${obj.age}岁了！, obj.age * 2 是${double.value}`
+    })
+  </script>
+</html>
